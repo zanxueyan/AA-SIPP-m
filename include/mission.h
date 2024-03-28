@@ -24,7 +24,7 @@ public:
     void startSearch();
     void printSearchResultsToConsole();
     void saveSearchResultsToLog();
-    void setFileNames(const char *taskName, const char* mapName, const char *configName, const char *obstaclesName);
+    void setFileNames(const std::string taskName, const std::string mapName, const std::string configName, const std::string obstaclesName);
 
 private:
     Map              m_map;
@@ -34,10 +34,10 @@ private:
     AA_SIPP*         m_pSearch;
     XmlLogger*       m_pLogger;
     SearchResult     sr;
-    const char*      mapName;
-    const char*      taskName;
-    const char*      configName;
-    const char*      obstaclesName;
+    std::string mapName;
+    std::string taskName;
+    std::string configName;
+    std::string obstaclesName;
 
 };
 

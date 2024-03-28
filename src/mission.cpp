@@ -12,33 +12,33 @@ Mission::~Mission()
     delete m_pLogger;
 }
 
-void Mission::setFileNames(const char *taskName, const char *mapName, const char *configName, const char *obstaclesName)
+void Mission::setFileNames(const std::string task_name, const std::string map_name, const std::string config_name, const std::string obstacles_name)
 {
-    this->mapName = mapName;
-    this->taskName = taskName;
-    this->configName = configName;
-    this->obstaclesName = obstaclesName;
+    this->mapName = map_name;
+    this->taskName = task_name;
+    this->configName = config_name;
+    this->obstaclesName = obstacles_name;
 }
 
 bool Mission::getMap()
 {
-    return m_map.getMap(mapName);
+    return m_map.getMap(mapName.c_str());
 }
 
 bool Mission::getTask()
 {
-    return (m_task.getTask(taskName) && m_task.validateTask(m_map));
+    return (m_task.getTask(taskName.c_str()) && m_task.validateTask(m_map));
 }
 
 bool Mission::getConfig()
 {
-    return m_config.getConfig(configName);
+    return m_config.getConfig(configName.c_str());
 }
 
 bool Mission::getObstacles()
 {
-    if(obstaclesName)
-        return m_obstacles.getObstacles(obstaclesName);
+    if(obstaclesName!="")
+        return m_obstacles.getObstacles(obstaclesName.c_str());
     else
         return false;
 }
@@ -58,7 +58,7 @@ void Mission::createLog()
     if(m_config.loglevel != CN_LOGLVL_NO)
     {
         m_pLogger = new XmlLogger(m_config.loglevel);
-        m_pLogger->createLog(taskName);
+        m_pLogger->createLog(taskName.c_str());
     }
 }
 
@@ -79,7 +79,7 @@ void Mission::saveSearchResultsToLog()
     if(m_config.loglevel == CN_LOGLVL_NO)
         return;
     std::cout<<"LOG STARTED\n";
-    m_pLogger->writeToLogInput(taskName, mapName, configName, obstaclesName);
+    m_pLogger->writeToLogInput(taskName.c_str(), mapName.c_str(), configName.c_str(), obstaclesName.c_str());
     m_pLogger->writeToLogSummary(sr);
     if(sr.pathfound)
     {

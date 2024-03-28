@@ -90,10 +90,10 @@ bool Map::getMap(const char* FileName)
                 value += rowtext[k];
             }
         }
-        stream << value;
+       /* stream << value;
         stream >> Grid[i][j];
         stream.clear();
-        stream.str("");
+        stream.str("");*/
 
         if (j < width-1)
         {
